@@ -75,7 +75,7 @@ class Wall:
                 pygame.draw.rect(screen, block_col, block[0])
                 pygame.draw.rect(screen, bg, (block[0]), 2)
 
-# Classe Paddle para o controle
+# Classe Paddle
 class Paddle:
     def __init__(self):
         self.reset()
@@ -98,7 +98,7 @@ class Paddle:
         self.y = screen_height - (self.height * 2)
         self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
 
-# Classe Ball para a bola
+# Classe Ball
 class Ball:
     def __init__(self, x, y):
         self.reset(x, y)
@@ -161,7 +161,7 @@ while run:
     clock.tick(fps)
     screen.fill(bg)
 
-    # Move o paddle com base na posição do rosto detectado
+    # Move o paddle com a última posição conhecida
     if centro_objeto is not None:
         player_paddle.move_to_position(centro_objeto[0])
 
@@ -202,4 +202,3 @@ while run:
 video_running.clear()
 thread_video.join()
 pygame.quit()
-
