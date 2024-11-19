@@ -46,7 +46,7 @@ def capturar_video(centro_callback, video_running):
             cv2.circle(frame, centro_suavizado, 5, (0, 0, 255), -1)
 
         # Exibe a imagem com a detecção de rosto
-        cv2.imshow("Detecção de Rosto", frame)
+        cv2.imshow("Deteccao de Rosto", frame)
 
         # Fecha a janela com a tecla 'q'
         if cv2.waitKey(1) & 0xFF == ord('q'):

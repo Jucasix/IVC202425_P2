@@ -1,5 +1,6 @@
 import pygame
 from pygame.locals import *
+import cv2
 from facedetect import capturar_video  # Importa a função de detecção de rosto
 import numpy as np
 import threading
@@ -28,6 +29,26 @@ clock = pygame.time.Clock()
 fps = 60
 live_ball = False
 game_over = 0
+
+def readme_window(window_name="README", width=800, height=300, font_scale=0.6, color=(255, 255, 255), thickness=1):
+    image = np.zeros((height,width, 3), dtype=np.uint8)
+
+    font = cv2.FONT_HERSHEY_SIMPLEX
+
+    text1 = "Usar a cabeca para jogar, movendo-a de um lado para o outro."
+    text2 = "Deve jogar com o rosto virada de frente para a camara."
+    text3 = "Deve estar entre 60 a 80 cm da camara."
+
+    text_x = 25
+    text_y1 = 100
+    text_y2 = 150
+    text_y3 = 200
+
+    cv2.putText(image, text1, (text_x, text_y1), font, font_scale, color, thickness, lineType=cv2.LINE_AA)
+    cv2.putText(image, text2, (text_x, text_y2), font, font_scale, color, thickness, lineType=cv2.LINE_AA)
+    cv2.putText(image, text3, (text_x, text_y3), font, font_scale, color, thickness, lineType=cv2.LINE_AA)
+    cv2.imshow(window_name, image)
+
 
 # Variável para armazenar a posição do rosto
 centro_objeto = None
@@ -151,6 +172,8 @@ wall = Wall()
 player_paddle = Paddle()
 ball = Ball(player_paddle.x + (player_paddle.width // 2), player_paddle.y - player_paddle.height)
 
+readme_window()
+
 # Inicia a thread de captura de vídeo com a detecção de rosto
 thread_video = threading.Thread(target=capturar_video, args=(atualizar_centro, video_running))
 thread_video.start()
@@ -201,4 +224,5 @@ while run:
 # Encerra a thread de captura de vídeo e fecha o jogo
 video_running.clear()
 thread_video.join()
+cv2.destroyAllWindows()
 pygame.quit()
