@@ -42,11 +42,13 @@ def capturar_video(centro_callback, video_running):
 
             # Desenha um retângulo ao redor do rosto
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+            # Desenha o ponto vermelho no centro do rosto
+            cv2.circle(frame, centro_suavizado, 5, (0, 0, 255), -1)
 
         # Exibe a imagem com a detecção de rosto
         cv2.imshow("Detecção de Rosto", frame)
 
-        # Fecha com a tecla 'q'
+        # Fecha a janela com a tecla 'q'
         if cv2.waitKey(1) & 0xFF == ord('q'):
             video_running.clear()
             break
